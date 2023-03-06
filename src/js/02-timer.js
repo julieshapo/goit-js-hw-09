@@ -15,6 +15,8 @@ const refs = {
 let startTime = 0;
 let intervalId = null;
 
+refs.button.disabled = false;
+
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -51,19 +53,30 @@ const timer = {
 
             const { days, hours, minutes, seconds } = convertMs(deltaTime);
             console.log({ days, hours, minutes, seconds });
-            
-            render({ days, hours, minutes, seconds })
-                        
+          
+          render({ days, hours, minutes, seconds });
+          
+          if (deltaTime <= 1000) {
+            this.stop();
+          }
+                                 
          }, 1000);
-    },
+  },
+
+  stop() {
+          refs.button.disabled = true;
+          clearInterval(intervalId);
+          return;
+        },
+
 }
 
 
 function onBtnClick() {
     if (intervalId)
-        return;
+    return;
 
-    timer.start();
+  timer.start();
 }
 
 function convertMs(ms) {

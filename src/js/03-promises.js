@@ -20,21 +20,22 @@ function createPromise(position, delay) {
   return promise;
 }
 
-form.addEventListener('submit', onFormSubmit) 
+form.addEventListener('submit', onFormSubmit)
 
 function onFormSubmit(evt) {
-    evt.preventDefault();
-    // console.log(evt.currentTarget.delay.value)
-    // console.log(evt.currentTarget.step.value)
-    // console.log(evt.currentTarget.amount.value)
+  evt.preventDefault();
+  
+    console.log(evt.currentTarget.delay.value)
+    console.log(evt.currentTarget.step.value)
+    console.log(evt.currentTarget.amount.value)
 
-    // let firstDelay = evt.currentTarget.delay.value;
-    let delayStep = evt.currentTarget.step.value;
-    let amount = evt.currentTarget.amount.value;
+    let firstDelay = Number(evt.currentTarget.delay.value);
+    let delayStep = Number(evt.currentTarget.step.value);
+    let amount = Number(evt.currentTarget.amount.value);
   
 
-    for (let i = 1; i <= amount; i += 1) {
-      createPromise(i, delayStep * i)
+    for (let i = 0; i < amount; i += 1) {
+      createPromise(1 + i, firstDelay + i * delayStep)
             .then(({ position, delay }) => {
                 
                 Notiflix.Notify.success(
@@ -49,5 +50,5 @@ function onFormSubmit(evt) {
             });
       
     }
-    // evt.currentTarget.reset();
+    evt.currentTarget.reset();
 }

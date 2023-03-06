@@ -6,6 +6,7 @@ const refs = {
 const PROMPT_DELAY = 1000;
 let intervalId = null;
 
+refs.stopBtn.setAttribute('disabled', '');
 
 refs.startBtn.addEventListener('click', onStartBtnClick);
 refs.stopBtn.addEventListener('click', onStopBtnClick);
@@ -36,5 +37,5 @@ function onStopBtnClick() {
 }
 
 function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
 } 

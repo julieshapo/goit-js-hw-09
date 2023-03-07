@@ -23,15 +23,20 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   
+  
   onClose(selectedDates) {
     //   console.log(selectedDates[0].getTime());
-      if (selectedDates[0] < Date.now()) {
+    if (selectedDates[0] < Date.now()) {
+               
+        clearInterval(intervalId);
+        console.log( refs.button.disabled)
         //   window.alert("Please choose a date in the future");
-          Notiflix.Notify.failure("Please choose a date in the future");
+        Notiflix.Notify.failure("Please choose a date in the future");
+      return;
       };
-
+     
       startTime = selectedDates[0].getTime();
-      refs.button.disabled = false;
+     
   },
 };
 

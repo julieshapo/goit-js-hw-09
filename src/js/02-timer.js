@@ -14,8 +14,8 @@ const refs = {
 
 let startTime = 0;
 let intervalId = null;
-
-refs.button.disabled = false;
+ 
+refs.button.disabled = true;
 
 const options = {
   enableTime: true,
@@ -26,29 +26,27 @@ const options = {
   
   onClose(selectedDates) {
     //   console.log(selectedDates[0].getTime());
-    if (selectedDates[0] < Date.now()) {
-               
-        clearInterval(intervalId);
-        console.log( refs.button.disabled)
+    if (selectedDates[0] < Date.now()) {  
+      clearInterval(intervalId);
         //   window.alert("Please choose a date in the future");
         Notiflix.Notify.failure("Please choose a date in the future");
       return;
-      };
-     
+      }
+     else {
+      refs.button.disabled = false;
       startTime = selectedDates[0].getTime();
+     }
+      
      
   },
 };
 
 flatpickr("#datetime-picker", options);
 
-
-refs.button.disabled = true;
 refs.button.addEventListener('click', onBtnClick)
 
 const timer = {
     start() {
-                
         intervalId = setInterval(() => {
             const currentTime = Date.now();
             // console.log(currentTime);
